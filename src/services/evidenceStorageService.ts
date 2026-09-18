@@ -42,7 +42,11 @@ class EvidenceStorageService {
     await this.init();
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction(STORE_NAME, 'readwrite');
+      if (!this.db) {
+        reject(new Error('Database not initialized. Please call init() first.'));
+        return;
+      }
+      const transaction = this.db.transaction(STORE_NAME, 'readwrite');
       const store = transaction.objectStore(STORE_NAME);
 
       const storedEvidence: StoredEvidence = {
@@ -64,7 +68,11 @@ class EvidenceStorageService {
     await this.init();
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction(STORE_NAME, 'readonly');
+      if (!this.db) {
+        reject(new Error('Database not initialized. Please call init() first.'));
+        return;
+      }
+      const transaction = this.db.transaction(STORE_NAME, 'readonly');
       const store = transaction.objectStore(STORE_NAME);
       const request = store.get(id);
 
@@ -77,7 +85,11 @@ class EvidenceStorageService {
     await this.init();
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction(STORE_NAME, 'readwrite');
+      if (!this.db) {
+        reject(new Error('Database not initialized. Please call init() first.'));
+        return;
+      }
+      const transaction = this.db.transaction(STORE_NAME, 'readwrite');
       const store = transaction.objectStore(STORE_NAME);
       const request = store.delete(id);
 
@@ -90,7 +102,11 @@ class EvidenceStorageService {
     await this.init();
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction(STORE_NAME, 'readonly');
+      if (!this.db) {
+        reject(new Error('Database not initialized. Please call init() first.'));
+        return;
+      }
+      const transaction = this.db.transaction(STORE_NAME, 'readonly');
       const store = transaction.objectStore(STORE_NAME);
       const request = store.getAll();
 
@@ -103,7 +119,11 @@ class EvidenceStorageService {
     await this.init();
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction(STORE_NAME, 'readwrite');
+      if (!this.db) {
+        reject(new Error('Database not initialized. Please call init() first.'));
+        return;
+      }
+      const transaction = this.db.transaction(STORE_NAME, 'readwrite');
       const store = transaction.objectStore(STORE_NAME);
       const request = store.clear();
 

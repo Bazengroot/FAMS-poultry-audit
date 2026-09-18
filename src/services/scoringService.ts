@@ -99,12 +99,12 @@ export function calculateAuditScore(sections: AuditSection[]): ScoreResult {
 }
 
 function getRiskLevel(score: number, settings: AppSettings, hasCritical: boolean): string {
-  if (hasCritical) return 'Kritis';
+  if (hasCritical) return 'Kritis (Critical Item)';
   if (score >= settings.scoreThresholds.excellent) return 'Excellent';
   if (score >= settings.scoreThresholds.good) return 'Baik';
   if (score >= settings.scoreThresholds.needsImprovement) return 'Perlu Perbaikan';
   if (score >= settings.scoreThresholds.poor) return 'Buruk';
-  return 'Kritis';
+  return 'Kritis (Low Score)';
 }
 
 export function getScoreColor(score: number): string {
@@ -129,7 +129,8 @@ export function getRiskColor(risk: string): string {
     case 'Baik': return 'text-blue-600';
     case 'Perlu Perbaikan': return 'text-yellow-600';
     case 'Buruk': return 'text-orange-600';
-    case 'Kritis': return 'text-red-600';
+    case 'Kritis (Critical Item)':
+    case 'Kritis (Low Score)': return 'text-red-600';
     default: return 'text-gray-600';
   }
 }
@@ -140,7 +141,8 @@ export function getRiskBadgeColor(risk: string): string {
     case 'Baik': return 'bg-blue-100 text-blue-800';
     case 'Perlu Perbaikan': return 'bg-yellow-100 text-yellow-800';
     case 'Buruk': return 'bg-orange-100 text-orange-800';
-    case 'Kritis': return 'bg-red-100 text-red-800';
+    case 'Kritis (Critical Item)':
+    case 'Kritis (Low Score)': return 'bg-red-100 text-red-800';
     default: return 'bg-gray-100 text-gray-800';
   }
 }

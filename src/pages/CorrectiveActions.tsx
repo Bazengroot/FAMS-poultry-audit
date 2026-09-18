@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Download, Edit, Eye, X, AlertTriangle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useToast } from '../components/Toast';
@@ -151,7 +151,7 @@ export default function CorrectiveActions() {
                 <label className="text-xs font-medium text-gray-600">Ubah Status:</label>
                 <div className="flex gap-2 mt-2 flex-wrap">
                   {(['open','in_progress','submitted_verification','verified','closed'] as CAStatus[]).filter(s => s !== showDetail.status).map(s => (
-                    <button key={s} onClick={() => { handleStatusChange(showDetail.id, s); setShowDetail({...showDetail, status: s}); }}
+                    <button key={s} onClick={() => { handleStatusChange(showDetail.id, s); }}
                       className={`text-xs px-2 py-1 rounded ${STATUS_COLORS[s]} hover:opacity-80`}>{STATUS_LABELS[s]}</button>
                   ))}
                 </div>
@@ -180,6 +180,11 @@ export default function CorrectiveActions() {
 function CAForm({ ca, onClose, users }: { ca: CorrectiveAction; onClose: () => void; users: any[] }) {
   const toast = useToast();
   const [form, setForm] = useState(ca);
+
+  useEffect(() => {
+    setForm(ca);
+  }, [ca]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     correctiveActionRepo.update(ca.id, form);
