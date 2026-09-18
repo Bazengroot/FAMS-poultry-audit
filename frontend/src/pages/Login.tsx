@@ -27,15 +27,6 @@ export default function Login() {
     }, 500);
   };
 
-  const handleDemoLogin = () => {
-    setLoading(true);
-    setTimeout(() => {
-      const success = login('superadmin', 'superadmin123');
-      if (success) navigate('/dashboard');
-      setLoading(false);
-    }, 300);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -79,19 +70,9 @@ export default function Login() {
               {loading ? 'Memproses...' : 'Masuk'}
             </button>
           </form>
-
-          <div className="mt-6 pt-6 border-t border-gray-100">
-            <button onClick={handleDemoLogin} disabled={loading}
-              className="w-full py-2.5 px-4 bg-blue-50 text-blue-700 rounded-lg font-medium hover:bg-blue-100 transition-colors text-sm flex items-center justify-center gap-2">
-              <LogIn className="w-4 h-4" />
-              Login sebagai Demo Super Admin
-            </button>
-            <p className="text-xs text-gray-400 text-center mt-3">
-              Demo: superadmin / superadmin123
-            </p>
-          </div>
-        </div>
+    </div>
       </div>
     </div>
   );
 }
+
